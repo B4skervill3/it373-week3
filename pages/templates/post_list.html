@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}
+    {{ title }}
+{% endblock title %}
+{% block content %}
+    <h1>Posts ({{ posts.count }}) </h1>
+    {% for post in posts %}
+    <article>
+        <h3>{{ post.title }}</h3>
+        <span><small>Posted {{ post.created_at|timesince }} ago</small></span>
+        <p>{{ post.body }}</p>
+        <h4>Comments ({{ posts.post.count }})</h4>
+    </article>
+    <hr>
+    {% empty %}
+    <p>No posts yet.</p>
+    {% endfor %}
+{% endblock content %} 

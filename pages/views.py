@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from pages.models import Post
 
 def home(request):
     context = {
@@ -27,3 +28,12 @@ def page_not_found_view(request, exception):
 
 def server_error_view(request):
     return render(request, '500.html', status=500)
+
+def post_list(request):
+    # Model.objects.all()
+    posts = Post.objects.all().prefetch_related('comments')
+    context = {
+        'posts': posts,
+        'title': 'Posts',
+    }
+    return render(request, 'post_list.html', context)
