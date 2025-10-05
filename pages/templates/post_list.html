@@ -9,7 +9,16 @@
         <h3>{{ post.title }}</h3>
         <span><small>Posted {{ post.created_at|timesince }} ago</small></span>
         <p>{{ post.body }}</p>
-        <h4>Comments ({{ posts.post.count }})</h4>
+        <h4>Comments ({{ post.comments.count }})</h4>
+        <ul>
+            {% for comment in post.comments.all %}
+                <li><strong>{{ comment.author }}</strong> {{ comment.text }} | {{ comment.created_at | timesince }} ago </li>
+            {% empty %}
+                <li>No comment yet.</li>
+            {% endfor %}
+
+        </ul>
+
     </article>
     <hr>
     {% empty %}
